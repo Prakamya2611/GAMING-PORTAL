@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prakamya's Gaming Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #050816;
+      color: #f5f5f5;
+    }
+
+    header {
+      background: #0f172a;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #cbd5f5;
+      font-size: 0.95rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #cbd5f5;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 26px;
+      border-radius: 999px;
+      background: #22c55e;
+      border: none;
+      color: #020617;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+    }
+
+    .games-section {
+      padding: 40px 20px 60px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .games-section h2 {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      border-left: 4px solid #22c55e;
+      padding-left: 10px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      background: #0b1220;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #1e293b;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 160px;
+    }
+
+    .game-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .game-card p {
+      font-size: 0.9rem;
+      color: #9ca3af;
+      margin-bottom: 15px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 18px;
+      font-size: 0.85rem;
+      color: #6b7280;
+      border-top: 1px solid #1f2937;
+      background: #020617;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 16px 14px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">🎮 GameHub</div>
+    <nav>
+      <a href="#games">Games</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to My Gaming Portal</h1>
+      <p>
+        A simple cloud-hosted hub where you can discover and play browser-based games.
+        Scroll down to play my latest game built using a cloud platform.
+      </p>
+      <!-- This button will link to your game (Objective 03) -->
+      <a class="btn" href="game.html" target="_blank">Play My Cloud Game</a>
+    </div>
+  </section>
+
+  <section id="games" class="games-section">
+    <h2>Featured Games</h2>
+    <div class="games-grid">
+      <div class="game-card">
+        <h3>Cloud Clicker</h3>
+        <p>A simple reaction-based browser game deployed using a cloud service and linked from this portal.</p>
+        <a class="btn" href="game.html" target="_blank">Play Now</a>
+      </div>
+      <div class="game-card">
+        <h3>Coming Soon...</h3>
+        <p>More HTML5 / JavaScript games will be added to this portal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="games-section">
+    <h2>About This Portal</h2>
+    <p style="color:#cbd5f5; margin-top:10px;">
+      This website is created as part of a cloud gaming assignment. 
+      The home page is hosted on GitHub Pages, and at least one game is deployed using a cloud service
+      and linked from this portal.
+    </p>
+  </section>
+
+  <section id="contact" class="games-section">
+    <h2>Contact</h2>
+    <p style="color:#cbd5f5; margin-top:10px;">
+      You can reach me at: <strong>your.email@example.com</strong>
+    </p>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 GameHub • Built with HTML, CSS and hosted on GitHub Pages
+  </footer>
+</body>
+</html>
