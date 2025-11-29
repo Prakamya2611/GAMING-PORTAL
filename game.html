@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cloud Clicker Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background: #020617;
+      color: #e5e7eb;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-top: 40px;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+      color: #9ca3af;
+      text-align: center;
+      max-width: 320px;
+    }
+
+    #game-area {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      border-radius: 14px;
+      border: 2px solid #22c55e;
+      margin-top: 20px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1e293b, #020617);
+    }
+
+    #target {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #22c55e;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    #target:active {
+      transform: scale(0.9);
+    }
+
+    .stats {
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      font-size: 0.95rem;
+    }
+
+    button {
+      margin-top: 16px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #3b82f6;
+      color: #f9fafb;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      filter: brightness(1.1);
+    }
+
+    .back-link {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .back-link a {
+      color: #22c55e;
+      text-decoration: none;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cloud Clicker</h1>
+  <p>
+    Click the green box as many times as you can in 20 seconds.
+    This game is hosted using a cloud service (GitHub Pages).
+  </p>
+
+  <div class="stats">
+    <div>Score: <span id="score">0</span></div>
+    <div>Time: <span id="time">20</span>s</div>
+  </div>
+
+  <div id="game-area">
+    <div id="target"></div>
+  </div>
+
+  <button id="start-btn">Start Game</button>
+
+  <div class="back-link">
+    <a href="index.html">← Back to Gaming Portal</a>
+  </div>
+
+  <script>
+    const target = document.getElementById("target");
+    const gameArea = document.getElementById("game-area");
+    const scoreSpan = document.getElementById("score");
+    const timeSpan = document.getElementById("time");
+    const startBtn = document.getElementById("start-btn");
+
+    let score = 0;
+    let timeLeft = 20;
+    let timerId = null;
+    let gameActive = false;
+
+    function randomPosition() {
+      const areaRect = gameArea.getBoundingClientRect();
+      const size = 40;
+      const maxX = areaRect.width - size;
+      const maxY = areaRect.height - size;
+
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+
+      target.style.left = x + "px";
+      target.style.top = y + "px";
+    }
+
+    function updateTimer() {
+      timeLeft--;
+      timeSpan.textContent = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(timerId);
+        gameActive = false;
+        startBtn.disabled = false;
+        alert("Time's up! Your score: " + score);
+      }
+    }
+
+    target.addEventListener("click", () => {
+      if (!gameActive) return;
+      score++;
+      scoreSpan.textContent = score;
+      randomPosition();
+    });
+
+    startBtn.addEventListener("click", () => {
+      score = 0;
+      scoreSpan.textContent = score;
+      timeLeft = 20;
+      timeSpan.textContent = timeLeft;
+      gameActive = true;
+      startBtn.disabled = true;
+      randomPosition();
+
+      if (timerId) clearInterval(timerId);
+      timerId = setInterval(updateTimer, 1000);
+    });
+
+    // Initial position
+    randomPosition();
+  </script>
+</body>
+</html>
