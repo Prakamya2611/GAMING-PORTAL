@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Color Match Challenge</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #fdf5ff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      color: #374151;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+      color: #da2f92;
+    }
+    #target {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(3, 90px);
+      grid-gap: 14px;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .box {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    .box:hover {
+      transform: scale(1.08);
+    }
+    #score, #time {
+      font-size: 1.2rem;
+      margin: 6px;
+    }
+    button {
+      padding: 10px 24px;
+      border: none;
+      background: #ff6fb5;
+      color: #111827;
+      font-weight: bold;
+      border-radius: 999px;
+      cursor: pointer;
+      margin-top: 18px;
+      box-shadow: 0 4px 14px rgba(255,111,181,.4);
+    }
+    button:hover {
+      filter: brightness(1.05);
+    }
+    .back {
+      margin-top: 18px;
+      font-size: 0.9rem;
+    }
+    .back a {
+      color: #ff6fb5;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Color Match Challenge 🎮</h1>
+  <div id="target">Match this color:</div>
+  <div id="grid"></div>
+
+  <div>
+    <span>Score: <strong id="score">0</strong></span> |
+    <span>Time: <strong id="time">30</strong>s</span>
+  </div>
+
+  <button id="startBtn">Start Game</button>
+
+  <div class="back">
+    <a href="index.html">← Back to GameHub</a>
+  </div>
+
+  <script>
+    const COLORS = ["#ff4d6d", "#4cc9f0", "#f72585", "#7209b7",
+                    "#3a0ca3", "#4361ee", "#4cc94c", "#ffda3e"];
+
+    const grid = document.getElementById("grid");
+    const target = document.getElementById("target");
+    const scoreDisplay = document.getElementById("score");
+    const timeDisplay = document.getElementById("time");
+    const startBtn = document.getElementById("startBtn");
+
+    let score = 0;
+    let time = 30;
+    let targetColor;
+    let timer;
+    let canPlay = false;
+
+    function generateBoxes() {
+      grid.innerHTML = "";
+      targetColor = COLORS[Math.floor(Math.random() * COLORS.length)];
+      target.textContent = `Match this color: ${targetColor}`;
+      for (let i = 0; i < 6; i++) {
+        const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+        const box = document.createElement("div");
+        box.className = "box";
+        box.style.background = color;
+        box.onclick = () => handleClick(color);
+        grid.appendChild(box);
+      }
+    }
+
+    function handleClick(color) {
+      if (!canPlay) return;
+      if (color === targetColor) {
+        score++;
+        scoreDisplay.textContent = score;
+      }
+      generateBoxes();
+    }
+
+    function countdown() {
+      time--;
+      timeDisplay.textContent = time;
+      if (time <= 0) {
+        clearInterval(timer);
+        canPlay = false;
+        startBtn.disabled = false;
+        alert(`Time up! Your total score: ${score}`);
+      }
+    }
+
+    startBtn.addEventListener("click", () => {
+      score = 0;
+      time = 30;
+      scoreDisplay.textContent = score;
+      timeDisplay.textContent = time;
+      canPlay = true;
+      startBtn.disabled = true;
+      generateBoxes();
+      timer = setInterval(countdown, 1000);
+    });
+  </script>
+</body>
+</html>
